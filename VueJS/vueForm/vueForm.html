@@ -1,4 +1,4 @@
-<!-- validation付きフォーム雛形 -->
+<!-- from with validation -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +14,6 @@
     <p>description:<input v-model="newEvent.description | descriptionValidator"></p>
     <p>data:<input v-model="newEvent.date | dateValidator"></p>
     <p>location:<input v-model="newEvent.location | locationValidator"></p>
-    <!-- <input v-model="newEvent.description | emailValidator"> -->
     <input type="submit" value="Add User">
   </form>
   <!-- error表示欄 -->
@@ -50,7 +49,7 @@
       }
     },
 
-    // validation 個別に作っているので、評価の仕方を変えられる
+    // validation
     filters: {
       titleValidator: {
         write: function (val) {
