@@ -1,0 +1,108 @@
+<!-- validation付きフォーム雛形 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vueForm</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+  <form id="form" v-on="submit:addUser">
+    <!-- それぞれに作ったvaidatorに通す -->
+    <p>title:<input v-model="newEvent.title | titleValidator"></p>
+    <p>description:<input v-model="newEvent.description | descriptionValidator"></p>
+    <p>data:<input v-model="newEvent.date | dateValidator"></p>
+    <p>location:<input v-model="newEvent.location | locationValidator"></p>
+    <!-- <input v-model="newEvent.description | emailValidator"> -->
+    <input type="submit" value="Add User">
+  </form>
+  <!-- error表示欄 -->
+  <ul class="errors">
+    <li v-show="!validation.title">title cannot be empty.</li>
+    <li v-show="!validation.description">description cannot be empty.</li>
+    <li v-show="!validation.date">date cannot be empty.</li>
+    <li v-show="!validation.location">location cannot be empty.</li>
+
+  </ul>
+
+</div>
+<script type="text/javascript">
+    var app = new Vue({
+
+    // element to mount to
+    el: '#app',
+
+    // initial data
+    data: {
+      users: [],
+      newEvent: {
+        title: '',
+        description: '',
+        date: '',
+        location: ''
+      },
+      validation: {
+        title: false,
+        description: false,
+        date: false,
+        location: false
+      }
+    },
+
+    // validation 個別に作っているので、評価の仕方を変えられる
+    filters: {
+      titleValidator: {
+        write: function (val) {
+          this.validation.title = !!val
+          return val
+        }
+      },
+      descriptionValidator: {
+        write: function (val) {
+          this.validation.description = !!val
+          return val
+        }
+      },
+      dateValidator: {
+        write: function (val) {
+          this.validation.date = !!val
+          return val
+        }
+      },
+      locationValidator: {
+        write: function (val) {
+          this.validation.location = !!val
+          return val
+        }
+      }
+    },
+
+    // computed property for form validation state
+    computed: {
+      isValid: function () {
+        var valid = true
+        for (var key in this.validation) {
+          if (!this.validation[key]) {
+            valid = false
+          }
+        }
+        return valid
+      }
+    },
+
+    // methods
+    methods: {
+      addUser: function (e) {
+        e.preventDefault()
+        if (this.isValid) {
+          console.log("success")
+        }else{
+          console.log("need edit")
+        }
+      },
+    }
+    })
+</script>
+</body>
+</html>
