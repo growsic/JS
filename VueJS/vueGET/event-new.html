@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Advents | 追加</title>
+  <script src="../vue.js"></script>
+  <script src="../vue-resource.js"></script>
+</head>
+<body>
+  <header>
+    <!-- some code -->
+  </header>
+
+  <main>
+    <div class="event-add">
+
+      <div id="app">
+      <form id="form" v-on="submit:addEvent">
+        <!-- それぞれに作ったvaidatorに通す -->
+        <p>title:<input v-model="newEvent.title | titleValidator"  name='title' value=''></p>
+        <p>description:<textarea v-model="newEvent.description | descriptionValidator" name='description' value=''></textarea></p>
+        <p>date:<input v-model="newEvent.date | dateValidator" name='date' value=''></p>
+        <p>location:<input v-model="newEvent.location | locationValidator" name='location' value=''></p>
+        <input type="submit" value="イベントを作成">
+      </form>
+      <!-- error表示欄 -->
+      <ul id="errors" class="display-none">
+        <!-- you need to implement "display-none" class which is simply display nothing -->
+        <li v-show="!validation.title">タイトルが未入力です</li>
+        <li v-show="!validation.description">説明が未入力です</li>
+        <li v-show="!validation.date">日付が未入力です</li>
+        <li v-show="!validation.location">場所が未入力です</li>
+      </ul>
+
+    </div>
+
+    </div>
+  </main>
+  <script src="event_add.js"></script>
+</body>
+</html>
