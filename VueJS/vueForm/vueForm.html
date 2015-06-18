@@ -8,13 +8,13 @@
 </head>
 <body>
   <div id="app">
-  <form id="form" v-on="submit:addUser">
+  <form id="form" v-on="submit:addEvent">
     <!-- それぞれに作ったvaidatorに通す -->
     <p>title:<input v-model="newEvent.title | titleValidator"></p>
     <p>description:<input v-model="newEvent.description | descriptionValidator"></p>
     <p>data:<input v-model="newEvent.date | dateValidator"></p>
     <p>location:<input v-model="newEvent.location | locationValidator"></p>
-    <input type="submit" value="Add User">
+    <input type="submit" value="Add event">
   </form>
   <!-- error表示欄 -->
   <ul class="errors">
@@ -34,7 +34,6 @@
 
     // initial data
     data: {
-      users: [],
       newEvent: {
         title: '',
         description: '',
@@ -92,7 +91,7 @@
 
     // methods
     methods: {
-      addUser: function (e) {
+      addEvent: function (e) {
         e.preventDefault()
         if (this.isValid) {
           console.log("success")
